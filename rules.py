@@ -1,3 +1,5 @@
+import random
+
 rules = {
     30 : {"000": '.',
           "00.": '.',
@@ -40,16 +42,12 @@ rules = {
            }
 }
 
-import random
-
 random.seed(1234)
-
-
-def generate_state(sym1, sym2):
-    string = [sym1]*10
-    string_list = list(string)
-    string_list[random.randint(0,9)]= sym2     #insert the 0 at a random position using a convertion to a list
-    return string_list
+def generate_state():
+    state_list = ['.']*11
+    state_list.insert(random.randint(0,10),'0')
+    state = ''.join(state_list)
+    return state
 
 def evolve(stato, rule_number):
     new_stato = ['']*12
@@ -77,6 +75,7 @@ def simulation(nsteps, rule_number):
 simulation(10, rule_number=30)
 
 ########################################################
+
 def test_generation_valid_state():
     """ this tests that the generation function returns valid states when used
     
@@ -105,8 +104,9 @@ def is_valid_state(state):
     WHEN: I apply it to generate an initial state
     THEN: the resulting state has only one alive
     """
-    
-    assert len(state)==20 #non so se può essere buona come validità
+    print(state)
+    print(len(state)==12)
+    assert len(state)==12 #non so se può essere buona come validità
 
 def test_evolve_valid():
     """ this tests that the evolve function returns valid states when used
@@ -116,23 +116,16 @@ def test_evolve_valid():
     THEN: the resulting state is still a valid one
     """
     state = generate_state() # the validity of this should be tested separetely
-    new_state = evolve(state)
+    new_state = evolve(state, rule_number=30)
     assert is_valid_state(new_state)
-
-    
-
-def test_generation_single_alive():
-    state = generate_state()
-    num_of_0 = sum(1 for i in state if i=='0')
-    assert num_of_0 == 1
 
 def test_length_evolved_state():
     state = generate_state()
-    new_state = evolve(state)
+    new_state = evolve(state, rule_number=30)
     assert len(state) == len(new_state)
 
 def test_validness_evolved_state():
     state = generate_state()
-    new_state = evolve(state)
+    new_state = evolve(state, rule_number=30)
     assert set(state) == {'.', '0'}
 
