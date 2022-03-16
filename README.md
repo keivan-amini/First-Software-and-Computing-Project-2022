@@ -10,8 +10,10 @@ In this project, the algorithm implemented is the so-called *Rule 30*, for which
 
 
 <p align="center">
+  <figure>
   <img src="https://mathworld.wolfram.com/images/eps-svg/ElementaryCARule030_1000.svg" />
   <figcaption> Rule 30 specifies the next color in a cell, depending on its color and its immediate neighbors. In this image we can see the evolution of a single black cell it produces after 15 step. </figcaption>
+  </figure>
 </p>
 
 
