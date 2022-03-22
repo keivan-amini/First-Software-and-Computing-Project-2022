@@ -120,11 +120,23 @@ def test_evolve_valid():
     assert is_valid_state(new_state)
 
 def test_length_evolved_state():
+    """ this tests that the evolve function returns valid states when used
+    
+    GIVEN: a valid state of my simulation
+    WHEN: I apply to it the evolve function
+    THEN: the resulting state has the same length of the initial one
+    """
     state = generate_state()
     new_state = evolve(state, rule_number=30)
     assert len(state) == len(new_state)
 
 def test_validness_evolved_state():
+    """ this tests that the evolution function returns valid states when used
+    
+    GIVEN: the function
+    WHEN: I apply it to evolve a state
+    THEN: the resulting state is still a valid one
+    """
     state = generate_state()
     new_state = evolve(state, rule_number=30)
     assert set(state) == {'.', '0'}
